@@ -1,12 +1,17 @@
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Result from "./pages/Result";
 
 function App() {
-
   return (
-    <>
-    <p className='text-3xl'>Entry Point/Main Application page</p>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/result" element={<Result />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
