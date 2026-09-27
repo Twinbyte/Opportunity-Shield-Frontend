@@ -28,11 +28,13 @@ export interface AnalysisResponse {
     status: "pending" | "processing" | "completed" | "failed"
     createdAt: string
     completedAt: string
-    progressSteps: ProgressStep[]
+    progressSteps: ProgressStep[] | null
     error: {
         code: string
         message: string
-    } | null 
+    } | null
     result: AnalysisResult | null
 
 }
+
+export type Mode = "url" | "text";

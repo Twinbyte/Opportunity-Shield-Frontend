@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createAnalysis, getAnalysis } from "../services/opportunityApi";
-
-type Mode = "url" | "text";
+import { createAnalysis } from "../services/opportunityApi";
+import { type Mode } from "../types/opportunity";
 
 function Home() {
   const [mode, setMode] = useState<Mode>("url");
@@ -29,13 +28,8 @@ function Home() {
     setIsLoading(true);
 
     try {
-      const data = await createAnalysis(input)
-      // console.log(data)
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
-      // alert("Data submitted!");
-      const analysisId = data.analysisId 
-      // const analysis = await getAnalysis(analysisId)
-      // console.log(analysis)
+      const data = await createAnalysis(input);
+      const analysisId = data.analysisId;
       navigate(`/result/${analysisId}`);
     } catch (error) {
       console.error("Submission failed", error);
@@ -123,14 +117,24 @@ function Home() {
                   inputMode="url"
                   placeholder="https://"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    if (error) {
+                      setError("");
+                    }
+                  }}
                 />
               ) : (
                 <textarea
                   className={`${field} min-h-32 resize-y`}
                   placeholder="Paste the email, WhatsApp message or job description"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    if (error) {
+                      setError("");
+                    }
+                  }}
                 ></textarea>
               )}
             </div>

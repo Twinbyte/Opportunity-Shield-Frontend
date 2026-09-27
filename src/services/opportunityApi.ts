@@ -36,7 +36,7 @@ export async function createAnalysis(input: string) {
     return response.data
 }
 
-export async function getAnalysis(analysisId: string): Promise<AnalysisResponse>{
+export async function getAnalysis(analysisId: string): Promise<AnalysisResponse> {
     const response = await api.get(`/api/v1/analyses/${analysisId}`)
 
     return response.data
