@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createAnalysis, getAnalysis } from "../services/opportunityApi";
 
 type Mode = "url" | "text";
 
@@ -28,9 +29,14 @@ function Home() {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Data submitted!");
-      navigate("/result");
+      const data = await createAnalysis(input)
+      // console.log(data)
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
+      // alert("Data submitted!");
+      const analysisId = data.analysisId 
+      // const analysis = await getAnalysis(analysisId)
+      // console.log(analysis)
+      navigate(`/result/${analysisId}`);
     } catch (error) {
       console.error("Submission failed", error);
       setError("We couldn't finish this check. Please try again.");

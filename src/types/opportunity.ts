@@ -1,12 +1,38 @@
 export interface AnalysisResult {
     opportunityName: string;
     organization: string;
-    riskScore: number;
-    riskLevel: string;
-    confidence: string;
+    trustScore: number | null;
+    riskLevel: "low" | "medium" | "high" | "unableToVerify";
+    confidence: "low" | "medium" | "high";
     summary: string;
     positiveSignals: string[];
     warningSignals: string[];
-    evidence: string[];
+    evidence: Evidence[];
     recommendation: string;
+}
+
+export interface Evidence {
+    type: string
+    detail: string
+    impact: string
+}
+
+export interface ProgressStep {
+    label: string
+    status: "pending" | "in_progress" | "done"
+    updatedAt: string
+}
+
+export interface AnalysisResponse {
+    analysisId: string
+    status: "pending" | "processing" | "completed" | "failed"
+    createdAt: string
+    completedAt: string
+    progressSteps: ProgressStep[]
+    error: {
+        code: string
+        message: string
+    } | null 
+    result: AnalysisResult | null
+
 }
