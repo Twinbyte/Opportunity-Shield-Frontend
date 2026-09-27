@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { AnalysisResponse } from "../types/opportunity"
+import type { AnalysisResponse, Mode } from "../types/opportunity"
 
 const BASE_URL = "https://opportunity-shield-api.onrender.com"
 
@@ -27,9 +27,9 @@ api.interceptors.response.use((response) => {
     return response
 })
 
-export async function createAnalysis(input: string) {
+export async function createAnalysis(input: string, inputType: Mode) {
     const response = await api.post(`/api/v1/analyses`, {
-        inputType: "text",
+        inputType: inputType,
         content: input,
     })
 

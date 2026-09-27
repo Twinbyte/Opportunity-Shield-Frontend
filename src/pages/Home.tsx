@@ -28,7 +28,7 @@ function Home() {
     setIsLoading(true);
 
     try {
-      const data = await createAnalysis(input);
+      const data = await createAnalysis(input, mode);
       const analysisId = data.analysisId;
       navigate(`/result/${analysisId}`);
     } catch (error) {

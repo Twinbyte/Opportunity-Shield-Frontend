@@ -43,6 +43,7 @@ function SignalList({ items, kind }: { items: string[]; kind: "bad" | "ok" }) {
 function Result() {
   const { analysisId } = useParams();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true)
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
   const [progressSteps, setProgressSteps] = useState<ProgressStep[]>([]);
@@ -53,6 +54,7 @@ function Result() {
 
     const fetchResult = async () => {
       const data = await getAnalysis(analysisId);
+      setIsLoading(false)
       // console.log("STATUS:", data.status);
       // console.log("FULL DATA:", data);
       if (data.status === "pending" || data.status === "processing") {
@@ -81,6 +83,21 @@ function Result() {
   if (error) {
     return <div>{error}</div>;
   }
+
+if (isLoading) {
+  return (
+    <div className="min-h-screen ...">
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <LoaderCircle className="mx-auto h-7 w-7 animate-spin" />
+          <p className="mt-3 text-sm text-slate-600">
+            Loading your analysis...
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
   if (isProcessing) {
     return (
@@ -221,7 +238,7 @@ function Result() {
                   className="border-l-4 border-slate-200 pl-4 text-slate-600"
                 >
                   {ev.detail}
-                  {ev.impact}
+                  {/* {ev.impact} */}
                 </li>
               ))}
             </ul>
