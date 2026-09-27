@@ -43,7 +43,7 @@ function SignalList({ items, kind }: { items: string[]; kind: "bad" | "ok" }) {
 function Result() {
   const { analysisId } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
   const [progressSteps, setProgressSteps] = useState<ProgressStep[]>([]);
@@ -54,7 +54,7 @@ function Result() {
 
     const fetchResult = async () => {
       const data = await getAnalysis(analysisId);
-      setIsLoading(false)
+      setIsLoading(false);
       // console.log("STATUS:", data.status);
       // console.log("FULL DATA:", data);
       if (data.status === "pending" || data.status === "processing") {
@@ -84,20 +84,20 @@ function Result() {
     return <div>{error}</div>;
   }
 
-if (isLoading) {
-  return (
-    <div className="min-h-screen ...">
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="text-center">
-          <LoaderCircle className="mx-auto h-7 w-7 animate-spin" />
-          <p className="mt-3 text-sm text-slate-600">
-            Loading your analysis...
-          </p>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen ...">
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="text-center">
+            <LoaderCircle className="mx-auto h-7 w-7 animate-spin" />
+            <p className="mt-3 text-sm text-slate-600">
+              Loading your analysis...
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   if (isProcessing) {
     return (
@@ -139,6 +139,18 @@ if (isLoading) {
     <div className="min-h-screen bg-slate-50 text-slate-900 bg-[radial-gradient(60%_45%_at_50%_0%,#e6e4ff,transparent_70%)]">
       <header className="mx-auto w-full max-w-3xl px-5 pt-5">
         <span className="inline-flex items-center gap-2 font-extrabold">
+          {/* <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              aria-hidden="true"
+              className="text-teal-700"
+            >
+              <path
+                d="M12 2 3 5v6c0 5.5 3.8 9.9 9 11 5.2-1.1 9-5.5 9-11v5l-9-3z"
+                fill="currentColor"
+              />
+            </svg> */}
           <svg
             viewBox="0 0 24 24"
             width="22"
@@ -147,7 +159,7 @@ if (isLoading) {
             className="text-teal-700"
           >
             <path
-              d="M12 218 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11v5z"
+              d="M12 2 3 5v6c0 5.5 3.8 9.9 9 11 5.2-1.1 9-5.5 9-11V5l-9-3z"
               fill="currentColor"
             />
           </svg>
