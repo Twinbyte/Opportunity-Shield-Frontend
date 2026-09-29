@@ -139,18 +139,6 @@ function Result() {
     <div className="min-h-screen bg-slate-50 text-slate-900 bg-[radial-gradient(60%_45%_at_50%_0%,#e6e4ff,transparent_70%)]">
       <header className="mx-auto w-full max-w-3xl px-5 pt-5">
         <span className="inline-flex items-center gap-2 font-extrabold">
-          {/* <svg
-              viewBox="0 0 24 24"
-              width="22"
-              height="22"
-              aria-hidden="true"
-              className="text-teal-700"
-            >
-              <path
-                d="M12 2 3 5v6c0 5.5 3.8 9.9 9 11 5.2-1.1 9-5.5 9-11v5l-9-3z"
-                fill="currentColor"
-              />
-            </svg> */}
           <svg
             viewBox="0 0 24 24"
             width="22"
