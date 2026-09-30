@@ -55,10 +55,7 @@ function Result() {
     const fetchResult = async () => {
       const data = await getAnalysis(analysisId);
       setIsLoading(false);
-      // console.log("STATUS:", data.status);
-      // console.log("FULL DATA:", data);
       if (data.status === "pending" || data.status === "processing") {
-        // console.log("SETTING PROCESSING TRUE")
         setProgressSteps(data.progressSteps ?? []);
         setIsProcessing(true);
 
@@ -72,9 +69,6 @@ function Result() {
         setError(data.error?.message || "Something went wrong");
         setIsProcessing(false);
       }
-      // console.log(data);
-      // console.log("STATUS:", data.status);
-      // console.log("steps:", data.progressSteps);
     };
 
     fetchResult();
