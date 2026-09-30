@@ -1,75 +1,87 @@
-# React + TypeScript + Vite
+# Opportunity Shield
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [API Integration](#api-integration)
+- [Screenshots](#screenshots)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **URL verification** — Submit an opportunity URL for analysis.
+- **Text verification** — Analyze opportunity messages, emails, or descriptions.
+- **Risk assessment** — Receive a risk level based on detected signals.
+- **Trust score** — View a trust score when sufficient information is available.
+- **Positive and warning signals, and evidence** — Understand what influenced the analysis.
+- **Analysis progress** — See the verification process as it happens.
+- **Recommendations** — Receive guidance based on the analysis.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How It Works
 
-## Expanding the ESLint configuration
+1. Paste a URL or text message/email into the input field on the homepage.
+2. Click **Analyze**.
+3. The application navigates to a result page and displays the progress of the verification.
+4. Once the analysis is complete, the result page displays information about the opportunity, including its risk level, confidence, signals, and recommendation.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend:** React + TypeScript
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/guide/react/)
+- **Routing:** [React Router DOM](https://www.npmjs.com/package/react-router-dom)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository
 
+```bash
+git clone <repository-url>
+cd opportunity-shield-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Start the development server
 
 ```
+npm run dev
+```
+
+## API Integration
+
+The application uses an asynchronous analysis flow:
+
+```text
+User submits URL/text
+        ↓
+POST /api/v1/analyses
+        ↓
+Receive analysisId
+        ↓
+Navigate to result page
+        ↓
+Poll GET /api/v1/analyses/{id}
+        ↓
+Show analysis progress
+        ↓
+Receive completed result
+        ↓
+Display risk assessment
+```
+
+## Screenshots
+
+### Homepage
+
+![Opportunity Shield homepage](./screenshots/home.png)
+
+### Analysis result
+
+![Analysis result](./screenshots/result.png)
